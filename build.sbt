@@ -3,7 +3,7 @@ val CirceVersion = "0.14.1"
 val MunitVersion = "0.7.27"
 val LogbackVersion = "1.2.5"
 val MunitCatsEffectVersion = "1.0.5"
-val TapirVersion = "0.19.0-M8"
+val TapirVersion = "1.0.1"
 
 lazy val root = (project in file("."))
   .settings(
@@ -21,6 +21,7 @@ lazy val root = (project in file("."))
       "org.typelevel" %% "munit-cats-effect-3" % MunitCatsEffectVersion % Test,
       "ch.qos.logback" % "logback-classic" % LogbackVersion,
       "com.softwaremill.sttp.tapir" %% "tapir-core" % TapirVersion,
+      "com.softwaremill.sttp.tapir" %% "tapir-json-circe" % TapirVersion,
       "com.softwaremill.sttp.tapir" %% "tapir-http4s-server" % TapirVersion,
       "org.scalameta" %% "svm-subs" % "20.2.0"
     ),
