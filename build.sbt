@@ -1,8 +1,8 @@
-val Http4sVersion = "0.23.1"
-val CirceVersion = "0.14.1"
-val MunitVersion = "0.7.27"
-val LogbackVersion = "1.2.5"
-val MunitCatsEffectVersion = "1.0.5"
+val Http4sVersion = "0.23.12"
+val CirceVersion = "0.14.2"
+val MunitVersion = "0.7.29"
+val LogbackVersion = "1.2.11"
+val MunitCatsEffectVersion = "1.0.7"
 val TapirVersion = "1.0.1"
 
 lazy val root = (project in file("."))
@@ -26,7 +26,7 @@ lazy val root = (project in file("."))
       "com.softwaremill.sttp.tapir" %% "tapir-swagger-ui-bundle" % TapirVersion,
       "org.scalameta" %% "svm-subs" % "20.2.0"
     ),
-    addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.13.0" cross CrossVersion.full),
+    addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.13.2" cross CrossVersion.full),
     addCompilerPlugin("com.olegpy" %% "better-monadic-for" % "0.3.1"),
     testFrameworks += new TestFramework("munit.Framework")
   )
