@@ -23,6 +23,7 @@ lazy val root = (project in file("."))
       "com.softwaremill.sttp.tapir" %% "tapir-core" % TapirVersion,
       "com.softwaremill.sttp.tapir" %% "tapir-json-circe" % TapirVersion,
       "com.softwaremill.sttp.tapir" %% "tapir-http4s-server" % TapirVersion,
+      "com.softwaremill.sttp.tapir" %% "tapir-swagger-ui-bundle" % TapirVersion,
       "org.scalameta" %% "svm-subs" % "20.2.0"
     ),
     addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.13.0" cross CrossVersion.full),
