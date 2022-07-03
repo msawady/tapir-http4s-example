@@ -1,4 +1,4 @@
-package tapir_http4s_example.routes
+package tapir_http4s_example.endpoint
 
 import io.circe.generic.semiauto._
 import io.circe.syntax._
@@ -10,7 +10,7 @@ import sttp.tapir.json.circe._
 import tapir_http4s_example.models.Task.{Status, TaskId}
 import tapir_http4s_example.models.{Problem, Task}
 
-object TaskRoutes {
+object TaskEndpoints {
 
   import codecs._
   val baseEndpoint: Endpoint[Unit, Unit, Problem, Unit, Any] = endpoint.in("task").errorOut(jsonBody[Problem])

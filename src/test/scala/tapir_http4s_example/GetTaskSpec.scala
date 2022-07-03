@@ -10,7 +10,7 @@ import org.http4s.implicits.http4sLiteralsSyntax
 import org.http4s.{Method, Request}
 import tapir_http4s_example.handler.GetTaskHandler
 import tapir_http4s_example.models.Task.TaskId
-import tapir_http4s_example.routes.TaskRoutes.GetTaskInput
+import tapir_http4s_example.endpoint.TaskEndpoints.GetTaskInput
 
 class GetTaskSpec extends CatsEffectSuite {
   private val client = Client.fromHttpApp(TaskHttp4sServer.httpApp)

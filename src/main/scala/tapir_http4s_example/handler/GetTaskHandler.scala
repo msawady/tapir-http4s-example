@@ -3,7 +3,7 @@ package tapir_http4s_example.handler
 import cats.effect.IO
 import tapir_http4s_example.models.{Problem, Task}
 import tapir_http4s_example.models.Task.Status
-import tapir_http4s_example.routes.TaskRoutes.GetTaskInput
+import tapir_http4s_example.endpoint.TaskEndpoints.GetTaskInput
 
 class GetTaskHandler {
 

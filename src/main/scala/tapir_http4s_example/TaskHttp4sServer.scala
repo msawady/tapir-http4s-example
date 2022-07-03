@@ -10,17 +10,17 @@ import org.http4s.ember.server.EmberServerBuilder
 import org.http4s.server.middleware.Logger
 import sttp.tapir.server.http4s.Http4sServerInterpreter
 import tapir_http4s_example.handler.GetTaskHandler
-import tapir_http4s_example.routes.TaskRoutes
+import tapir_http4s_example.endpoint.TaskEndpoints
 
 object TaskHttp4sServer {
 
   // memo: use DI in production
   val getTaskHandler = new GetTaskHandler
 
-  val getTaskRoute: HttpRoutes[IO] = Http4sServerInterpreter[IO]().toRoutes(
-    TaskRoutes.getTaskEndpoint.serverLogic(getTaskHandler.getTask)
+  val routes: HttpRoutes[IO] = Http4sServerInterpreter[IO]().toRoutes(
+    TaskEndpoints.getTaskEndpoint.serverLogic(getTaskHandler.getTask)
   )
-  val httpApp: Kleisli[IO, Request[IO], Response[IO]] = getTaskRoute.orNotFound
+  val httpApp: Kleisli[IO, Request[IO], Response[IO]] = routes.orNotFound
 
   def stream: Stream[IO, Nothing] = {
     val withLogger = Logger.httpApp(logHeaders = true, logBody = true)(httpApp)
