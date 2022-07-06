@@ -8,7 +8,7 @@ import tapir_http4s_example.endpoint.TaskEndpoints
 
 import scala.collection.immutable.ListMap
 
-object GenSpec extends IOApp {
+object GenOpenApiSpec extends IOApp {
 
   override def run(args: List[String]): IO[ExitCode] = {
     val endpoints = List(TaskEndpoints.getTaskEndpoint)
