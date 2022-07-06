@@ -2,7 +2,7 @@ package tapir_http4s_example.handler
 
 import cats.effect.IO
 import tapir_http4s_example.models.{Problem, Task}
-import tapir_http4s_example.models.Task.Status
+import tapir_http4s_example.models.Task.TaskStatus
 import tapir_http4s_example.endpoint.TaskEndpoints.GetTaskInput
 
 class GetTaskHandler {
@@ -11,7 +11,7 @@ class GetTaskHandler {
     taskId = in.taskId,
     summery = "mock res",
     detail = "this is mock response detail.",
-    status = Status.Done
+    status = TaskStatus.Done
   )
   val mockProblem: Problem = Problem("failing", "this is mock failure.")
 
@@ -34,7 +34,7 @@ object GetTaskHandler {
     taskId = in.taskId,
     summery = "mock res",
     detail = "this is mock response detail.",
-    status = Status.Done
+    status = TaskStatus.Done
   )
   val mockProblem: Problem = Problem("failing", "this is mock failure.")
 

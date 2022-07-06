@@ -17,13 +17,13 @@ class GetTaskSpec extends CatsEffectSuite {
 
   test("get task") {
     val request: Request[IO] = Request(method = Method.GET, uri = uri"/task/task1")
-    val actual: IO[Json] = client.expect[Json](request)
+    val actual: IO[Json] = client.expect[Json](request).flatTap(v => IO.println(v))
     val mockTask = GetTaskHandler.mockTask(GetTaskInput(TaskId("task1")))
     val expected = Json.obj(
       "taskId" := mockTask.taskId.value,
       "summery" := mockTask.summery,
       "detail" := mockTask.detail,
-      "status" := mockTask.status.asString
+      "status" := mockTask.status.value
     )
     assertIO(actual, expected)
   }
@@ -31,7 +31,7 @@ class GetTaskSpec extends CatsEffectSuite {
     val actual: IO[Json] = client.get(uri"/task/FAIL")(res => {
       assert(res.status.code == 400)
       res.as[Json]
-    })
+    }).flatTap(v => IO.println(v))
     val mockProblem = GetTaskHandler.mockProblem
     val expected = Json.obj(
       "title" := mockProblem.title,

@@ -4,6 +4,7 @@ val MunitVersion = "0.7.29"
 val LogbackVersion = "1.2.11"
 val MunitCatsEffectVersion = "1.0.7"
 val TapirVersion = "1.0.1"
+val EnumeratumVersion = "1.7.0"
 
 lazy val root = (project in file("."))
   .settings(
@@ -24,6 +25,9 @@ lazy val root = (project in file("."))
       "com.softwaremill.sttp.tapir" %% "tapir-json-circe" % TapirVersion,
       "com.softwaremill.sttp.tapir" %% "tapir-http4s-server" % TapirVersion,
       "com.softwaremill.sttp.tapir" %% "tapir-swagger-ui-bundle" % TapirVersion,
+      "com.softwaremill.sttp.tapir" %% "tapir-enumeratum" % TapirVersion,
+      "com.beachape" %% "enumeratum" % EnumeratumVersion,
+      "com.beachape" %% "enumeratum-circe" % EnumeratumVersion,
       "org.scalameta" %% "svm-subs" % "20.2.0"
     ),
     addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.13.2" cross CrossVersion.full),
