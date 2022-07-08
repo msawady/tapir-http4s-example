@@ -28,6 +28,7 @@ lazy val root = (project in file("."))
       "com.softwaremill.sttp.tapir" %% "tapir-enumeratum" % TapirVersion,
       "com.beachape" %% "enumeratum" % EnumeratumVersion,
       "com.beachape" %% "enumeratum-circe" % EnumeratumVersion,
+      "com.chuusai" %% "shapeless" % "2.3.9",
       "org.scalameta" %% "svm-subs" % "20.2.0"
     ),
     addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.13.2" cross CrossVersion.full),

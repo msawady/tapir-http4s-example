@@ -1,6 +1,7 @@
 package tapir_http4s_example.models
 
 import enumeratum.values.{StringCirceEnum, StringEnum, StringEnumEntry}
+import tapir_http4s_example.lib.Atom
 import tapir_http4s_example.models.Task.{TaskId, TaskStatus}
 
 case class Task(
@@ -12,11 +13,11 @@ case class Task(
 
 object Task {
 
-  case class TaskId(value: String)
+  case class TaskId(value: String) extends Atom[String]
 
   sealed abstract class TaskStatus(val value: String) extends StringEnumEntry
 
-  object TaskStatus extends StringEnum[TaskStatus] with StringCirceEnum[TaskStatus]{
+  object TaskStatus extends StringEnum[TaskStatus] with StringCirceEnum[TaskStatus] {
 
     case object Todo extends TaskStatus("TODO")
     case object Doing extends TaskStatus("DOING")
