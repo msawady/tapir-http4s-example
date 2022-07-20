@@ -1,7 +1,6 @@
 package tapir_http4s_example.endpoint
 
 import io.circe.generic.auto._
-import io.circe.syntax._
 import io.circe.{Decoder, Encoder}
 import shapeless._
 import sttp.tapir.CodecFormat.TextPlain
@@ -9,7 +8,7 @@ import sttp.tapir.EndpointIO.annotations.{endpointInput, path}
 import sttp.tapir._
 import sttp.tapir.generic.auto._
 import sttp.tapir.json.circe._
-import tapir_http4s_example.lib.Atom
+import tapir_http4s_example.lib.{Atom, Atom0}
 import tapir_http4s_example.models.Task.TaskId
 import tapir_http4s_example.models.{Problem, Task}
 
@@ -26,18 +25,21 @@ object TaskEndpoints {
 
   object codecs {
 
-    // memo: utilize wrapped value
     implicit def stringAtomSchema[T <: Atom[String]]: Schema[T] = Schema(SchemaType.SString())
 
     implicit def stringAtomCodec[T <: Atom[String]](
         implicit gen: Generic.Aux[T, String :: HNil]
     ): Codec[String, T, TextPlain] = Codec.string.map(v => gen.from(v :: HNil))(_.value)
 
-    implicit def atomDecoder[T <: Atom[String]](
-        implicit gen: Generic.Aux[T, String :: HNil]
-    ): Decoder[T] = Decoder.instance(c => c.as[String].map(v => gen.from(v :: HNil)))
+    implicit def atomDecoder[T <: Atom0](
+        implicit
+        gen: Generic.Aux[T, T#Value :: HNil],
+        valueDecoder: Decoder[T#Value]
+    ): Decoder[T] = valueDecoder.map(x => gen.from(x :: HNil))
 
-    implicit def atomEncoder[T <: Atom[String]](): Encoder[T] = Encoder.instance(a => a.value.asJson)
+    implicit def atomEncoder[T <: Atom0](
+        implicit valueEncoder: Encoder[T#Value]
+    ): Encoder[T] = valueEncoder.contramap(_.value)
 
   }
 }
