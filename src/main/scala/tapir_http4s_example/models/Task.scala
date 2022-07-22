@@ -1,13 +1,25 @@
 package tapir_http4s_example.models
 
 import enumeratum.values.{StringCirceEnum, StringEnum, StringEnumEntry}
+import sttp.tapir.Schema.annotations.{description, validate}
+import sttp.tapir.Validator
 import tapir_http4s_example.lib.Atom
 import tapir_http4s_example.models.Task.{TaskId, TaskStatus}
 
 case class Task(
+    @description("ID of task")
     taskId: TaskId,
+    @description("Summery of task.")
+    @validate(Validator.maxLength(100))
     summery: String,
+    @description(
+      """
+        |Details of task.
+        |
+        |You can write details with new lines.
+        |""".stripMargin)
     detail: String,
+    @description("Status of task.")
     status: TaskStatus
 )
 
