@@ -4,7 +4,7 @@ import io.circe.generic.auto._
 import io.circe.{Decoder, Encoder}
 import shapeless._
 import sttp.tapir.CodecFormat.TextPlain
-import sttp.tapir.EndpointIO.annotations.{endpointInput, path}
+import sttp.tapir.EndpointIO.annotations.path
 import sttp.tapir._
 import sttp.tapir.generic.auto._
 import sttp.tapir.json.circe._
@@ -20,7 +20,6 @@ object TaskEndpoints {
     endpoint.in("task").errorOut(jsonBody[Problem])
       .tag("Task API")
 
-  @endpointInput("task/{taskId}")
   case class GetTaskInput(@path taskId: TaskId)
 
   val getTaskEndpoint: Endpoint[Unit, GetTaskInput, Problem, Task, Any] =
