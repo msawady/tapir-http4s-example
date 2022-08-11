@@ -24,7 +24,7 @@ lazy val root = (project in file("."))
       "com.softwaremill.sttp.tapir" %% "tapir-core" % TapirVersion,
       "com.softwaremill.sttp.tapir" %% "tapir-json-circe" % TapirVersion,
       "com.softwaremill.sttp.tapir" %% "tapir-http4s-server" % TapirVersion,
-      "com.softwaremill.sttp.tapir" %% "tapir-swagger-ui-bundle" % TapirVersion,
+      "com.softwaremill.sttp.tapir" %% "tapir-redoc-bundle" % TapirVersion,
       "com.softwaremill.sttp.tapir" %% "tapir-enumeratum" % TapirVersion,
       "com.beachape" %% "enumeratum" % EnumeratumVersion,
       "com.beachape" %% "enumeratum-circe" % EnumeratumVersion,

@@ -1,16 +1,13 @@
-package tapir_http4s_example
-
-import cats.effect.{ExitCode, IO, IOApp}
-import sttp.apispec.openapi.circe.yaml._
-import sttp.apispec.openapi.{Contact, Info, License}
+package tapir_http4s_example.open_api
+import sttp.apispec.openapi.{Contact, Info, License, OpenAPI}
 import sttp.tapir.docs.openapi.OpenAPIDocsInterpreter
 import tapir_http4s_example.endpoint.TaskEndpoints
 
 import scala.collection.immutable.ListMap
 
-object GenOpenApiSpec extends IOApp {
+object TaskOpenApi {
 
-  override def run(args: List[String]): IO[ExitCode] = {
+  val GenerateOpenApiSpec: OpenAPI = {
     val endpoints = List(TaskEndpoints.getTaskEndpoint)
     val docs = OpenAPIDocsInterpreter()
       .toOpenAPI(
@@ -35,7 +32,6 @@ object GenOpenApiSpec extends IOApp {
           extensions = ListMap.empty
         )
       )
-
-    IO.pure(println(docs.toYaml)).as(ExitCode.Success)
+    docs
   }
 }

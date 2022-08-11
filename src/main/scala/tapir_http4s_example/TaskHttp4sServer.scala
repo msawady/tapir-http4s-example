@@ -5,12 +5,15 @@ import cats.effect.{IO, Resource}
 import cats.syntax.all._
 import com.comcast.ip4s._
 import fs2.Stream
-import org.http4s.{HttpRoutes, Request, Response}
 import org.http4s.ember.server.EmberServerBuilder
 import org.http4s.server.middleware.Logger
+import org.http4s.{HttpRoutes, Request, Response}
+import sttp.apispec.openapi.circe.yaml._
+import sttp.tapir.redoc.{Redoc, RedocUIOptions}
 import sttp.tapir.server.http4s.Http4sServerInterpreter
-import tapir_http4s_example.handler.GetTaskHandler
 import tapir_http4s_example.endpoint.TaskEndpoints
+import tapir_http4s_example.handler.GetTaskHandler
+import tapir_http4s_example.open_api.TaskOpenApi
 
 object TaskHttp4sServer {
 
@@ -18,8 +21,16 @@ object TaskHttp4sServer {
   val getTaskHandler = new GetTaskHandler
 
   val routes: HttpRoutes[IO] = Http4sServerInterpreter[IO]().toRoutes(
-    TaskEndpoints.getTaskEndpoint.serverLogic(getTaskHandler.getTask)
+    List(
+      TaskEndpoints.getTaskEndpoint.serverLogic(getTaskHandler.getTask)
+    ) ++
+      Redoc[IO](
+        "task api doc",
+        TaskOpenApi.GenerateOpenApiSpec.toYaml,
+        RedocUIOptions.default
+      )
   )
+
   val httpApp: Kleisli[IO, Request[IO], Response[IO]] = routes.orNotFound
 
   def stream: Stream[IO, Nothing] = {
