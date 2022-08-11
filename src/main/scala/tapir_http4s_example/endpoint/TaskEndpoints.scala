@@ -15,13 +15,17 @@ import tapir_http4s_example.models.{Problem, Task}
 object TaskEndpoints {
 
   import codecs._
-  val baseEndpoint: Endpoint[Unit, Unit, Problem, Unit, Any] = endpoint.in("task").errorOut(jsonBody[Problem])
+
+  val baseEndpoint: Endpoint[Unit, Unit, Problem, Unit, Any] =
+    endpoint.in("task").errorOut(jsonBody[Problem])
+      .tag("Task API")
 
   @endpointInput("task/{taskId}")
   case class GetTaskInput(@path taskId: TaskId)
 
   val getTaskEndpoint: Endpoint[Unit, GetTaskInput, Problem, Task, Any] =
     baseEndpoint.in(path[TaskId]("taskId")).mapInTo[GetTaskInput].out(jsonBody[Task])
+      .name("getTask")
 
   object codecs {
 

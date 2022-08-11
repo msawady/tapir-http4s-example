@@ -18,7 +18,7 @@ object TaskOpenApi {
           description = Some(
             """| This is API spec for My App.
                |
-               | We can write description contains new lines.
+               | You can write more description with new lines.
                |""".stripMargin
           ),
           termsOfService = Some("see: https://my-company.com/terms_of_service"),
